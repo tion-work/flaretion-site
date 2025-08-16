@@ -44,14 +44,22 @@ const nextConfig = {
 
 ## 🔧 关键修复说明
 
-### 问题：构建失败 "Cannot find module 'tailwindcss'"
+### 问题 1：构建失败 "Cannot find module 'tailwindcss'"
 **原因**: 在 Netlify 生产构建环境中，`devDependencies` 中的包不会被安装
 **解决方案**: 将构建必需的包移动到 `dependencies` 中
+
+### 问题 2：TypeScript 构建失败
+**原因**: TypeScript 和类型定义包在 `devDependencies` 中，Netlify 构建时需要它们
+**解决方案**: 将 TypeScript 相关包也移动到 `dependencies` 中
 
 ### 修复的包：
 - `tailwindcss` - CSS 框架
 - `autoprefixer` - CSS 前缀处理
 - `postcss` - CSS 后处理器
+- `typescript` - TypeScript 编译器
+- `@types/node` - Node.js 类型定义
+- `@types/react` - React 类型定义
+- `@types/react-dom` - React DOM 类型定义
 
 ## 🌐 Netlify 部署步骤
 
@@ -98,6 +106,11 @@ NODE_ENV: production
 - 确保版本一致性
 - 适合 CI/CD 环境
 
+### 为什么所有构建包都在 `dependencies` 中？
+- Netlify 生产环境只安装 `dependencies`
+- `devDependencies` 中的包在构建时不可用
+- 包括 TypeScript、CSS 处理器、类型定义等
+
 ## 🚨 注意事项
 
 1. **Google AdSense**: 确保在部署后测试广告是否正常显示
@@ -105,6 +118,7 @@ NODE_ENV: production
 3. **API 路由**: 静态导出不支持 API 路由
 4. **服务端功能**: 所有功能必须在客户端执行
 5. **依赖管理**: 构建必需的包必须在 `dependencies` 中
+6. **TypeScript**: 确保 TypeScript 和类型定义包在 `dependencies` 中
 
 ## 📱 部署后检查
 
@@ -121,6 +135,7 @@ NODE_ENV: production
 3. **样式问题**: 确认 CSS 文件正确生成
 4. **脚本错误**: 检查浏览器控制台
 5. **模块找不到**: 确认依赖包在正确的位置
+6. **TypeScript 错误**: 确认 TypeScript 包在 `dependencies` 中
 
 ## 🚀 优化建议
 
@@ -128,6 +143,23 @@ NODE_ENV: production
 2. **使用 npm ci**: 更快的依赖安装
 3. **环境变量**: 设置正确的 Node.js 版本
 4. **重定向规则**: 处理 Next.js 路由
+5. **依赖分类**: 构建必需的包放在 `dependencies` 中
+
+## 📋 完整的依赖分类
+
+### dependencies (构建必需)
+- `next` - Next.js 框架
+- `react` - React 库
+- `react-dom` - React DOM
+- `tailwindcss` - CSS 框架
+- `autoprefixer` - CSS 前缀
+- `postcss` - CSS 后处理器
+- `typescript` - TypeScript 编译器
+- `@types/*` - 类型定义
+
+### devDependencies (开发时使用)
+- `eslint` - 代码检查
+- `eslint-config-next` - Next.js ESLint 配置
 
 ---
 
