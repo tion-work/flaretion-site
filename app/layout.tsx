@@ -18,14 +18,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
-      <body className={inter.className}>
-        {/* Google AdSense - 在 head 中加载 */}
-        <Script
+      <head>
+        {/* Google AdSense - 确保在 head 中加载 */}
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3668315850009617"
           crossOrigin="anonymous"
-          strategy="beforeInteractive"
         />
+      </head>
+      <body className={inter.className}>
         {children}
       </body>
     </html>
