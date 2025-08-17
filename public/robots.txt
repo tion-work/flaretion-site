@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# 允许所有搜索引擎爬虫访问
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# 禁止访问管理页面（如果有的话）
+Disallow: /admin/
+Disallow: /api/
+
+# 允许访问静态资源
+Allow: /_next/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+# 设置爬取延迟
+Crawl-delay: 1
+
+# 站点地图
+Sitemap: https://flaretion.com/sitemap.xml

@@ -5,6 +5,19 @@ import { useState } from 'react'
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // 平滑滚动到锚点
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+    // 关闭移动端菜单
+    setIsMenuOpen(false)
+  }
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,16 +29,22 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <a href="#features" className="text-gray-700 hover:text-primary-600 transition-colors">
+            <button 
+              onClick={() => scrollToSection('features')}
+              className="text-gray-700 hover:text-primary-600 transition-colors cursor-pointer"
+            >
               功能特性
-            </a>
-            <a href="#pricing" className="text-gray-700 hover:text-primary-600 transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('pricing')}
+              className="text-gray-700 hover:text-primary-600 transition-colors cursor-pointer"
+            >
               价格方案
-            </a>
-            <a href="#about" className="text-gray-700 hover:text-primary-600 transition-colors">
+            </button>
+            <a href="/about" className="text-gray-700 hover:text-primary-600 transition-colors">
               关于我们
             </a>
-            <a href="#contact" className="text-gray-700 hover:text-primary-600 transition-colors">
+            <a href="/contact" className="text-gray-700 hover:text-primary-600 transition-colors">
               联系我们
             </a>
           </nav>
@@ -57,16 +76,22 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              <a href="#features" className="block px-3 py-2 text-gray-700 hover:text-primary-600">
+              <button 
+                onClick={() => scrollToSection('features')}
+                className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary-600"
+              >
                 功能特性
-              </a>
-              <a href="#pricing" className="block px-3 py-2 text-gray-700 hover:text-primary-600">
+              </button>
+              <button 
+                onClick={() => scrollToSection('pricing')}
+                className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary-600"
+              >
                 价格方案
-              </a>
-              <a href="#about" className="block px-3 py-2 text-gray-700 hover:text-primary-600">
+              </button>
+              <a href="/about" className="block px-3 py-2 text-gray-700 hover:text-primary-600">
                 关于我们
               </a>
-              <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-primary-600">
+              <a href="/contact" className="block px-3 py-2 text-gray-700 hover:text-primary-600">
                 联系我们
               </a>
               <div className="pt-4 space-y-2">
