@@ -1,12 +1,32 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function AdBanner() {
+  const adRef = useRef<HTMLModElement>(null);
+  const hasAdLoaded = useRef(false);
+
   useEffect(() => {
+    // 检查是否已经加载过广告
+    if (hasAdLoaded.current) {
+      return;
+    }
+
+    // 检查元素是否已经包含广告
+    if (adRef.current && adRef.current.querySelector('iframe')) {
+      hasAdLoaded.current = true;
+      return;
+    }
+
     // 执行 Google AdSense 代码
-    if (typeof window !== 'undefined' && window.adsbygoogle) {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    if (typeof window !== 'undefined' && window.adsbygoogle && adRef.current) {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        hasAdLoaded.current = true;
+      } catch (error) {
+        console.log('AdSense ad already loaded or error occurred:', error);
+        hasAdLoaded.current = true;
+      }
     }
   }, []);
 
@@ -18,6 +38,7 @@ export default function AdBanner() {
             <p className="text-sm text-gray-500 mb-4">广告</p>
             {/* Google AdSense 广告单元 */}
             <ins
+              ref={adRef}
               className="adsbygoogle"
               style={{ display: 'block' }}
               data-ad-client="ca-pub-3668315850009617"
