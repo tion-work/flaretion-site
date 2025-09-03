@@ -28,8 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <head>
         <GoogleAnalytics />
+      </head>
+      <body className={`${inter.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
