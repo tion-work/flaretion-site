@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { event } from '../lib/gtag'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -47,6 +48,11 @@ export default function Header() {
             <Link
               href="/signup"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
+              onClick={() => event({
+                action: 'click',
+                category: 'CTA',
+                label: 'Header - 免费试用'
+              })}
             >
               免费试用
             </Link>

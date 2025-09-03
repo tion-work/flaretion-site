@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { event } from '../lib/gtag'
 
 export default function Pricing() {
   const plans = [
@@ -187,6 +190,11 @@ export default function Pricing() {
                   <Link
                     href={plan.ctaLink}
                     className={`w-full bg-gradient-to-r ${colors.gradient} ${colors.hover} text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 text-center block`}
+                    onClick={() => event({
+                      action: 'click',
+                      category: 'Pricing',
+                      label: `${plan.name} - ${plan.cta}`
+                    })}
                   >
                     {plan.cta}
                   </Link>
