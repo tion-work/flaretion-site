@@ -16,6 +16,13 @@
 - 将关键依赖移到 `dependencies` 中
 - 使用 `npm ci` 确保依赖安装一致性
 
+### **3. TypeScript 依赖问题**
+**问题**: `typescript`, `@types/react`, `@types/node` 在构建时找不到
+
+**解决方案**:
+- 将TypeScript相关依赖移到 `dependencies` 中
+- 确保所有类型定义包都可用
+
 ## 📁 **修改的文件**
 
 ### **1. `src/app/page.tsx`**
@@ -36,7 +43,11 @@ import Hero from '../components/Hero'
   "dependencies": {
     "tailwindcss": "^3.4.1",
     "autoprefixer": "^10.4.16", 
-    "postcss": "^8.4.32"
+    "postcss": "^8.4.32",
+    "typescript": "^5.9.2",
+    "@types/node": "^20.19.11",
+    "@types/react": "^18.3.24",
+    "@types/react-dom": "^18"
   }
 }
 ```
@@ -70,8 +81,10 @@ git push origin main
 
 - [x] 组件导入路径修复
 - [x] 依赖配置正确
+- [x] TypeScript依赖修复
 - [x] 构建脚本优化
 - [x] Netlify配置更新
+- [x] Node.js版本配置
 - [x] 本地构建测试通过
 
 ## 🎯 **预期结果**
